@@ -53,7 +53,10 @@ def digit_distance(n):
     ...       ['For', 'While'])
     True
     """
-    "*** YOUR CODE HERE ***"
+    if n < 10:
+        return 0
+    else:
+        return digit_distance(n // 10) + abs(((n % 10) - (n // 10 % 10)))
 
 
 def interleaved_sum(n, odd_term, even_term):
@@ -75,8 +78,17 @@ def interleaved_sum(n, odd_term, even_term):
     >>> check(HW_SOURCE_FILE, 'interleaved_sum', ['While', 'For', 'Mod']) # ban loops and %
     True
     """
-    "*** YOUR CODE HERE ***"
-
+    def helper_odd(i):
+        if i == n:
+            return odd_term(n)
+        if i < n:
+            return odd_term(i) + helper_even(i+1)
+    def helper_even(i):
+        if i == n:
+            return even_term(n)
+        if i < n:
+            return even_term(i) + helper_odd(i+1)
+    return helper_odd(1)
 
 def next_larger_coin(coin):
     """Returns the next larger coin in order.
