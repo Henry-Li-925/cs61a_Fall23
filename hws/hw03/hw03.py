@@ -141,7 +141,20 @@ def count_coins(total):
     >>> check(HW_SOURCE_FILE, 'count_coins', ['While', 'For'])
     True
     """
-    "*** YOUR CODE HERE ***"
+    def helper(total, x):
+        if total >= 0:
+            if total == 0:
+                return 1
+            elif x != None:
+                if total // x !=0:
+                    return helper(total-x, x)+helper(total, next_larger_coin(x))
+                elif total // x == 0:
+                    return 0
+            else:
+                return 0
+        else:
+            return 0
+    return helper(total, 1)
 
 
 def print_move(origin, destination):
